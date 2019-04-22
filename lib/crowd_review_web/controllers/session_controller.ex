@@ -18,7 +18,7 @@ defmodule CrowdReviewWeb.SessionController do
       {:error, :not_found, conn} ->
         conn
         |> put_flash(:error, "Oops, we couldn't find that email!")
-        |> redirect(to: Routes.user_path(conn, :create))
+        |> redirect(to: Routes.user_path(conn, :new))
 
       {:error, :unauthorized, conn} ->
         conn

@@ -17,7 +17,7 @@ defmodule CrowdReviewWeb.Router do
   scope "/", CrowdReviewWeb do
     pipe_through :browser
 
-    resources "/users", UserController, only: [:index, :show, :new, :create]
+    resources "/users", UserController, only: [:show, :new, :create]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     get "/", PageController, :index
   end

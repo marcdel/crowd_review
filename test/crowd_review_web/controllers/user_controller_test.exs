@@ -13,16 +13,6 @@ defmodule CrowdReviewWeb.UserControllerTest do
   end
 
   describe "when user is logged in" do
-    test "GET /users", %{conn: conn} do
-      user = Accounts.get_user(2)
-      conn = sign_in(conn, user)
-
-      conn = get(conn, Routes.user_path(conn, :index))
-
-      assert html_response(conn, 200) =~ "Marc"
-      assert html_response(conn, 200) =~ "Jackie"
-    end
-
     test "GET /users/:id", %{conn: conn} do
       user1 = Accounts.get_user(1)
       conn = sign_in(conn, user1)
@@ -49,11 +39,6 @@ defmodule CrowdReviewWeb.UserControllerTest do
   end
 
   describe "when user is not logged in" do
-    test "GET /users redirects", %{conn: conn} do
-      conn = get(conn, Routes.user_path(conn, :index))
-      assert html_response(conn, 302) =~ "redirected"
-    end
-
     test "GET /users/:id redirects", %{conn: conn} do
       conn1 = get(conn, Routes.user_path(conn, :show, "1"))
       assert html_response(conn1, 302) =~ "redirected"
@@ -88,7 +73,7 @@ defmodule CrowdReviewWeb.UserControllerTest do
     assert %{id: id} = redirected_params(conn)
     assert redirected_to(conn) == Routes.user_path(conn, :show, id)
 
-    assert Accounts.get_user_by_email("jane@email.com") != nil
+    assert %User{id: id, username: "janedoe"} = Accounts.get_user_by_email("jane@email.com")
   end
 
   test "POST /users with invalid data", %{conn: conn} do

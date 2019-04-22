@@ -5,12 +5,7 @@ defmodule CrowdReviewWeb.UserController do
   alias CrowdReview.Accounts.User
   alias CrowdReviewWeb.Auth
 
-  plug :authenticate_user when action in [:index, :show]
-
-  def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, "index.html", users: users)
-  end
+  plug :authenticate_user when action in [:show]
 
   def show(conn, params) do
     if Auth.it_me?(conn, params) do

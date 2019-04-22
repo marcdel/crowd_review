@@ -15,7 +15,7 @@ defmodule CrowdReviewWeb.SessionControllerTest do
         )
 
       assert get_flash(conn, :error) =~ "Oops, we couldn't find that email!"
-      assert redirected_to(conn) == Routes.user_path(conn, :create)
+      assert redirected_to(conn) == Routes.user_path(conn, :new)
     end
 
     test "redirects to user's profile page when user is registered", %{conn: conn} do
@@ -36,26 +36,26 @@ defmodule CrowdReviewWeb.SessionControllerTest do
       assert get_flash(conn, :info) =~ "Welcome back, Marc!"
       assert redirected_to(conn) == Routes.user_path(conn, :show, user.id)
     end
-  end
 
-  test "POST /sessions with invalid password", %{conn: conn} do
-    Fixtures.registered_user(%{
-      name: "Marc",
-      credential: %{
-        email: "marcdel@email.com",
-        password: "password"
+    test "shows an error when logging in with an invalid password", %{conn: conn} do
+      Fixtures.registered_user(%{
+        name: "Marc",
+        credential: %{
+          email: "marcdel@email.com",
+          password: "password"
+        }
+      })
+
+      invalid_session = %{
+        "email" => "marcdel@email.com",
+        "password" => "wrong password"
       }
-    })
 
-    invalid_session = %{
-      "email" => "marcdel@email.com",
-      "password" => "wrong password"
-    }
+      create_conn = post(conn, Routes.session_path(conn, :create), session: invalid_session)
 
-    create_conn = post(conn, Routes.session_path(conn, :create), session: invalid_session)
-
-    # Can't get_flash for some reason, so have to assert on the html response
-    assert html_response(create_conn, 200) =~ "Oops, the password you entered was incorrect!"
+      # Can't get_flash for some reason, so have to assert on the html response
+      assert html_response(create_conn, 200) =~ "Oops, the password you entered was incorrect!"
+    end
   end
 
   test "DELETE /sessions", %{conn: conn} do
