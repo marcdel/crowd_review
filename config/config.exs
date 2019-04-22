@@ -7,15 +7,15 @@
 # General application configuration
 use Mix.Config
 
-config :phoenix_boilerplate,
-  ecto_repos: [PhoenixBoilerplate.Repo]
+config :crowd_review,
+  ecto_repos: [CrowdReview.Repo]
 
 # Configures the endpoint
-config :phoenix_boilerplate, PhoenixBoilerplateWeb.Endpoint,
+config :crowd_review, CrowdReviewWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "Dv10UjgHtx3Z1Y0GS/E7m6GlzJWCmaIxo7YTKDZNVpRHx8OCMDwXheVhAcKym+YF",
-  render_errors: [view: PhoenixBoilerplateWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: PhoenixBoilerplate.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: CrowdReviewWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: CrowdReview.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,

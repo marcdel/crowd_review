@@ -1,4 +1,4 @@
-defmodule PhoenixBoilerplate.DataCase do
+defmodule CrowdReview.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -19,17 +19,17 @@ defmodule PhoenixBoilerplate.DataCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import PhoenixBoilerplate.DataCase
+      import CrowdReview.DataCase
     end
   end
 
   setup tags do
     alias Ecto.Adapters.SQL.Sandbox
 
-    :ok = Sandbox.checkout(PhoenixBoilerplate.Repo)
+    :ok = Sandbox.checkout(CrowdReview.Repo)
 
     unless tags[:async] do
-      Sandbox.mode(PhoenixBoilerplate.Repo, {:shared, self()})
+      Sandbox.mode(CrowdReview.Repo, {:shared, self()})
     end
 
     :ok

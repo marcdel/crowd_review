@@ -1,9 +1,9 @@
-defmodule PhoenixBoilerplateWeb.IntegrationCase do
+defmodule CrowdReviewWeb.IntegrationCase do
   use ExUnit.CaseTemplate
 
   using do
     quote do
-      use PhoenixBoilerplateWeb.ConnCase
+      use CrowdReviewWeb.ConnCase
       use PhoenixIntegration
     end
   end

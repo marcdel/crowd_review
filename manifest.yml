@@ -1,10 +1,10 @@
 ---
 applications:
-  - name: phoenix-boilerplate-v2
+  - name: crowd-review-v2
     memory: 1024M
     instances: 1
     routes:
-      - route: phoenix-boilerplate-v2.cfapps.io
+      - route: crowd-review-v2.cfapps.io
     buildpacks:
       -   https://github.com/HashNuke/heroku-buildpack-elixir.git
     env:

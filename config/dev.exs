@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :phoenix_boilerplate, PhoenixBoilerplateWeb.Endpoint,
+config :crowd_review, CrowdReviewWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -46,13 +46,13 @@ config :phoenix_boilerplate, PhoenixBoilerplateWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :phoenix_boilerplate, PhoenixBoilerplateWeb.Endpoint,
+config :crowd_review, CrowdReviewWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/phoenix_boilerplate_web/views/.*(ex)$},
-      ~r{lib/phoenix_boilerplate_web/templates/.*(eex)$}
+      ~r{lib/crowd_review_web/views/.*(ex)$},
+      ~r{lib/crowd_review_web/templates/.*(eex)$}
     ]
   ]
 
@@ -67,9 +67,9 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
-config :phoenix_boilerplate, PhoenixBoilerplate.Repo,
+config :crowd_review, CrowdReview.Repo,
   username: "postgres",
   password: "postgres",
-  database: "phoenix_boilerplate_dev",
+  database: "crowd_review_dev",
   hostname: "localhost",
   pool_size: 10

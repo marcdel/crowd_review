@@ -1,5 +1,5 @@
 File.exists?(Path.expand("~/.iex.exs")) && import_file("~/.iex.exs")
 
-alias PhoenixBoilerplate.Repo
-alias PhoenixBoilerplate.Accounts
-alias PhoenixBoilerplate.Accounts.User
+alias CrowdReview.Repo
+alias CrowdReview.Accounts
+alias CrowdReview.Accounts.User

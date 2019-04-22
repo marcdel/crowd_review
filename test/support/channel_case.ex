@@ -1,4 +1,4 @@
-defmodule PhoenixBoilerplateWeb.ChannelCase do
+defmodule CrowdReviewWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -22,15 +22,15 @@ defmodule PhoenixBoilerplateWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint PhoenixBoilerplateWeb.Endpoint
+      @endpoint CrowdReviewWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Sandbox.checkout(PhoenixBoilerplate.Repo)
+    :ok = Sandbox.checkout(CrowdReview.Repo)
 
     unless tags[:async] do
-      Sandbox.mode(PhoenixBoilerplate.Repo, {:shared, self()})
+      Sandbox.mode(CrowdReview.Repo, {:shared, self()})
     end
 
     :ok

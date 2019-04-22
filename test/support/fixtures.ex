@@ -1,5 +1,5 @@
 defmodule Fixtures do
-  alias PhoenixBoilerplate.Accounts
+  alias CrowdReview.Accounts
 
   def registered_user(attrs \\ %{}) do
     default_user_attrs = %{

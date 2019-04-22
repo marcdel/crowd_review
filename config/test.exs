@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :phoenix_boilerplate, PhoenixBoilerplateWeb.Endpoint,
+config :crowd_review, CrowdReviewWeb.Endpoint,
   http: [port: 4002],
   server: false
 
@@ -10,12 +10,12 @@ config :phoenix_boilerplate, PhoenixBoilerplateWeb.Endpoint,
 config :logger, level: :warn
 
 # Configure your database
-config :phoenix_boilerplate, PhoenixBoilerplate.Repo,
+config :crowd_review, CrowdReview.Repo,
   username: "postgres",
   password: "postgres",
-  database: "phoenix_boilerplate_test",
+  database: "crowd_review_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :phoenix_integration,
-  endpoint: PhoenixBoilerplateWeb.Endpoint
+  endpoint: CrowdReviewWeb.Endpoint

@@ -1,9 +1,9 @@
-defmodule PhoenixBoilerplate.MixProject do
+defmodule CrowdReview.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :phoenix_boilerplate,
+      app: :crowd_review,
       version: "0.1.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule PhoenixBoilerplate.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {PhoenixBoilerplate.Application, []},
+      mod: {CrowdReview.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

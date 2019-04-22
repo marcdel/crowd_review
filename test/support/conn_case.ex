@@ -1,4 +1,4 @@
-defmodule PhoenixBoilerplateWeb.ConnCase do
+defmodule CrowdReviewWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -20,15 +20,15 @@ defmodule PhoenixBoilerplateWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias PhoenixBoilerplateWeb.Router.Helpers, as: Routes
-      alias PhoenixBoilerplateWeb.Auth
+      alias CrowdReviewWeb.Router.Helpers, as: Routes
+      alias CrowdReviewWeb.Auth
 
       # The default endpoint for testing
-      @endpoint PhoenixBoilerplateWeb.Endpoint
+      @endpoint CrowdReviewWeb.Endpoint
 
       def sign_in(conn, user) do
         conn
-        |> bypass_through(PhoenixBoilerplateWeb.Router, :browser)
+        |> bypass_through(CrowdReviewWeb.Router, :browser)
         |> get(Routes.page_path(conn, :index))
         |> Auth.login(user)
         |> send_resp(:ok, "")
@@ -38,10 +38,10 @@ defmodule PhoenixBoilerplateWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Sandbox.checkout(PhoenixBoilerplate.Repo)
+    :ok = Sandbox.checkout(CrowdReview.Repo)
 
     unless tags[:async] do
-      Sandbox.mode(PhoenixBoilerplate.Repo, {:shared, self()})
+      Sandbox.mode(CrowdReview.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

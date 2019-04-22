@@ -1,4 +1,4 @@
-defmodule PhoenixBoilerplate.Repo.Migrations.CreateCredentials do
+defmodule CrowdReview.Repo.Migrations.CreateCredentials do
   use Ecto.Migration
 
   def change do

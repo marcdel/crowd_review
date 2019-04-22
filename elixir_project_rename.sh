@@ -4,9 +4,9 @@
 # Configuration
 # -----------------------------------------------------------------------------
 
-pascalCaseBefore="PhoenixBoilerplate"
-snakeCaseBefore="phoenix_boilerplate"
-kebabCaseBefore="phoenix-boilerplate"
+pascalCaseBefore="CrowdReview"
+snakeCaseBefore="crowd_review"
+kebabCaseBefore="crowd-review"
 
 # The identifiers above will be replaced in the content of the files found below
 content=$(find . -type f \( \
@@ -22,7 +22,6 @@ content=$(find . -type f \( \
   -name "Dockerfile" -or \
   -name "Makefile" \
 \) \
-  -and ! -path "./boilerplate-setup.sh" \
   -and ! -path "./assets/node_modules/*" \
   -and ! -path "./_build/*" \
   -and ! -path "./deps/*" \
