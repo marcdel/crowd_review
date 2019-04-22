@@ -1,0 +1,12 @@
+---
+applications:
+  - name: phoenix-boilerplate-v2
+    memory: 1024M
+    instances: 1
+    routes:
+      - route: phoenix-boilerplate-v2.cfapps.io
+    buildpacks:
+      -   https://github.com/HashNuke/heroku-buildpack-elixir.git
+    env:
+      MIX_ENV: prod
+    command: MIX_ENV=prod mix ecto.migrate && mix phx.server
