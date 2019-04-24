@@ -1,3 +1,12 @@
 <section class="phx-hero">
   <h1>Crowd Review</h1>
+  <p>
+    Crowdsource your code reviews! <br/>
+    Help other people review their code! Read more code!
+  </p>
+  <br/>
+  <p>
+    <button>Get a Review</button>
+    <button>Give a Review</button>
+  </p>
 </section>

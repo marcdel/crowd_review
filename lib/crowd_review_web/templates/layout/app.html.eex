@@ -10,9 +10,9 @@
   <body>
     <header>
       <section class="container">
+        <a href="/">Crowd Review</a>
         <nav role="navigation">
            <ul>
-              <li><a href="/">Home</a></li>
               <%= if @current_user do %>
                 <li><%= @current_user.name %></li>
                 <li><%= link "Profile", to: Routes.user_path(@conn, :show, @current_user.id) %></li>
@@ -22,13 +22,12 @@
                     method: "delete" %>
                 </li>
               <% else %>
+                <li></li>
                 <li><%= link "Register", to: Routes.user_path(@conn, :new) %></li>
                 <li><%= link "Log in", to: Routes.session_path(@conn, :new) %></li>
               <% end %>
             </ul>
         </nav>
-        <a href="/" class="phx-logo">
-        </a>
       </section>
     </header>
     <main role="main" class="container">
