@@ -4,6 +4,9 @@
 [![Codecov](https://img.shields.io/codecov/c/github/marcdel/crowd_review.svg)](https://codecov.io/gh/marcdel/crowd_review)
 [![Inch](http://inch-ci.org/github/marcdel/crowd_review.svg)](http://inch-ci.org/github/marcdel/crowd_review)
 
+## 🚧 WIP 🚧
+![Crowd Review Landing Page](Crowd%20Review%20Landing%20Page.png "Crowd Review Landing Page")
+
 ## Setup
 * `./setup.sh`
 
