@@ -146,4 +146,51 @@ defmodule CrowdReview.AccountsTest do
                Accounts.authenticate_by_email_and_password("bademail@localhost", @pass)
     end
   end
+
+  describe "review_request" do
+    alias CrowdReview.Accounts.ReviewRequest
+
+    @valid_attrs %{language: "elixir", url: "github.com/test/pr/1"}
+    @invalid_attrs %{language: nil, url: nil}
+
+    def review_request_fixture(attrs \\ %{}) do
+      {:ok, review_request} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_review_request(nil)
+
+      review_request
+    end
+
+    test "list_review_requests/0 returns all review_request" do
+      review_request = review_request_fixture()
+      assert Accounts.list_review_requests() == [review_request]
+    end
+
+    test "create_review_request/1 with valid data creates a review_request" do
+      assert {:ok, %ReviewRequest{} = review_request} =
+               Accounts.create_review_request(@valid_attrs, nil)
+
+      assert review_request.language == "elixir"
+      assert review_request.url == "github.com/test/pr/1"
+    end
+
+    test "create_review_request/1 with with user links review_request to user" do
+      user = Fixtures.registered_user()
+
+      assert {:ok, %ReviewRequest{} = review_request} =
+               Accounts.create_review_request(@valid_attrs, user)
+
+      assert review_request.user_id == user.id
+    end
+
+    test "create_review_request/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_review_request(@invalid_attrs, nil)
+    end
+
+    test "change_review_request/1 returns a review_request changeset" do
+      review_request = review_request_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_review_request(review_request)
+    end
+  end
 end

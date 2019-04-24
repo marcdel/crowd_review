@@ -19,6 +19,7 @@ defmodule CrowdReviewWeb.Router do
 
     resources "/users", UserController, only: [:show, :new, :create]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
+    resources "/review_requests", ReviewRequestController, only: [:new, :create, :index]
     get "/", PageController, :index
   end
 

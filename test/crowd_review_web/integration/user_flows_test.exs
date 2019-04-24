@@ -39,4 +39,23 @@ defmodule CrowdReviewWeb.UserFlowsTest do
       path: Routes.user_path(conn, :show, user.id)
     )
   end
+
+  @tag :integration
+  test "user can create a new review request and see it in the list", %{conn: conn} do
+    conn
+    |> get(Routes.page_path(conn, :index))
+    |> follow_link("Get a Review")
+    |> assert_response(status: 200, path: Routes.review_request_path(conn, :new))
+    |> follow_form(%{
+      review_request: %{
+        url: "https://github.com/phoenixframework/phoenix/pull/3327",
+        language: "javascript"
+      }
+    })
+    |> assert_response(
+      status: 200,
+      html: "https://github.com/phoenixframework/phoenix/pull/3327",
+      path: Routes.review_request_path(conn, :index)
+    )
+  end
 end

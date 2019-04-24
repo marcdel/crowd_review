@@ -6,7 +6,7 @@
   </p>
   <br/>
   <p>
-    <button>Get a Review</button>
-    <button>Give a Review</button>
+    <%= link "Get a Review", to: Routes.review_request_path(@conn, :new), class: "button" %>
+    <%= link "Give a Review", to: Routes.review_request_path(@conn, :index), class: "button" %>
   </p>
 </section>

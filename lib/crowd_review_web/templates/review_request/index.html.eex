@@ -1,0 +1,22 @@
+<h1>Listing Review Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>Language</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for review_request <- @review_request do %>
+      <tr>
+        <td><a href=<%= review_request.url %>><%= review_request.url %></a></td>
+        <td><%= review_request.language %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Review request", to: Routes.review_request_path(@conn, :new) %></span>

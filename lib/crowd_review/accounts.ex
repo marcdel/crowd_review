@@ -1,7 +1,7 @@
 defmodule CrowdReview.Accounts do
   import Ecto.Query, warn: false
 
-  alias CrowdReview.Accounts.User
+  alias CrowdReview.Accounts.{ReviewRequest, User}
   alias CrowdReview.Repo
 
   def list_users do
@@ -65,5 +65,26 @@ defmodule CrowdReview.Accounts do
       error_result ->
         error_result
     end
+  end
+
+  def list_review_requests do
+    Repo.all(ReviewRequest)
+  end
+
+  def create_review_request(attrs, nil = _user) do
+    %ReviewRequest{}
+    |> ReviewRequest.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_review_request(attrs, %User{} = user) do
+    user
+    |> Ecto.build_assoc(:review_requests)
+    |> ReviewRequest.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def change_review_request(%ReviewRequest{} = review_request) do
+    ReviewRequest.changeset(review_request, %{})
   end
 end

@@ -1,12 +1,13 @@
 defmodule CrowdReview.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias CrowdReview.Accounts.Credential
+  alias CrowdReview.Accounts.{Credential, ReviewRequest}
 
   schema "users" do
     field :name, :string
     field :username, :string
     has_one :credential, Credential
+    has_many :review_requests, ReviewRequest
 
     timestamps()
   end
