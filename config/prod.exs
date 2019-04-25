@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :crowd_review, CrowdReviewWeb.Endpoint,
-  http: [:inet6, port: System.get_env("PORT") || 4000],
+  http: [:inet4, port: System.get_env("PORT") || 4000],
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
@@ -75,3 +75,11 @@ secret_key_base = System.get_env("SECRET_KEY_BASE") || raise "SECRET_KEY_BASE mu
 config :crowd_review_web,
        CrowdReviewWeb.Endpoint,
        secret_key_base: secret_key_base
+
+database_url = System.get_env("DATABASE_URL") || raise "DATABASE_URL must be set"
+pool_size = System.get_env("POOL_SIZE") || "1"
+
+config :crowd_review, CrowdReview.Repo,
+       adapter: Ecto.Adapters.Postgres,
+       url: database_url,
+       pool_size: String.to_integer(pool_size)
