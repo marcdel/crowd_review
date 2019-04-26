@@ -80,6 +80,6 @@ database_url = System.get_env("DATABASE_URL") || raise "DATABASE_URL must be set
 pool_size = System.get_env("POOL_SIZE") || "1"
 
 config :crowd_review, CrowdReview.Repo,
-       adapter: Ecto.Adapters.Postgres,
-       url: database_url,
-       pool_size: String.to_integer(pool_size)
+  adapter: Ecto.Adapters.Postgres,
+  url: database_url,
+  pool_size: String.to_integer(pool_size)

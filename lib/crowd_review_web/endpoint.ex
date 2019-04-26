@@ -13,7 +13,7 @@ defmodule CrowdReviewWeb.Endpoint do
     at: "/",
     from: :crowd_review,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt coc.html)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

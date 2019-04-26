@@ -5,7 +5,7 @@ defmodule CrowdReviewWeb.PageControllerTest do
     conn = get(conn, "/")
 
     assert html_response(conn, 200) =~ "Crowd Review"
+    assert html_response(conn, 200) =~ "Request a Review"
     assert html_response(conn, 200) =~ "Give a Review"
-    assert html_response(conn, 200) =~ "Get a Review"
   end
 end

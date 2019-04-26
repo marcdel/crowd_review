@@ -44,7 +44,7 @@ defmodule CrowdReviewWeb.UserFlowsTest do
   test "user can create a new review request and see it in the list", %{conn: conn} do
     conn
     |> get(Routes.page_path(conn, :index))
-    |> follow_link("Get a Review")
+    |> follow_link("Request a Review")
     |> assert_response(status: 200, path: Routes.review_request_path(conn, :new))
     |> follow_form(%{
       review_request: %{

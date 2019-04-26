@@ -1,19 +1,28 @@
 <h1>Listing Review Requests</h1>
 
+<p>
+  Ready to help out another dev, and maybe learn a little something on the way?<br/>
+  Make sure you review and follow the <a href="coc.html">code of conduct</a> for our community.<br/>
+  Here are some quick tips to help you give the best review possible:
+</p>
+<ul>
+  <li>Strive for constructive feedback only. Make it specific, empathetic, and actionable.</li>
+  <li>Keep it positive. Focus on how the code can be improved rather than what's wrong with it.</li>
+  <li>Don't sweat the small stuff. Skip formatting and code style feedback unless it's asked for.</li>
+</ul>
+
 <table>
   <thead>
     <tr>
-      <th>Url</th>
       <th>Language</th>
-
-      <th></th>
+      <th>Url</th>
     </tr>
   </thead>
   <tbody>
     <%= for review_request <- @review_request do %>
       <tr>
-        <td><a href=<%= review_request.url %>><%= review_request.url %></a></td>
         <td><%= review_request.language %></td>
+        <td><a href=<%= review_request.url %>><%= review_request.url %></a></td>
       </tr>
     <% end %>
   </tbody>
