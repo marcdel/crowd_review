@@ -6,8 +6,8 @@ defmodule CrowdReviewWeb.ReviewRequestController do
   alias CrowdReviewWeb.Auth
 
   def index(conn, _params) do
-    review_request = Accounts.list_review_requests()
-    render(conn, "index.html", review_request: review_request)
+    review_requests = Accounts.list_review_requests()
+    render(conn, "index.html", review_requests: review_requests)
   end
 
   def new(conn, _params) do
