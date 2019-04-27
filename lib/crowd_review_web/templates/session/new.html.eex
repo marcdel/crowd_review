@@ -1,4 +1,4 @@
-<h1>Login</h1>
+<h3>Login</h3>
 
 <%= form_for @conn, Routes.session_path(@conn, :create), [as: :session], fn f -> %>
   <div>
@@ -7,5 +7,5 @@
   <div>
     <%= password_input f, :password, placeholder: "Password" %>
   </div>
-  <%= submit "Log In" %>
+  <%= submit "Log In", class: "button" %>
 <% end %>

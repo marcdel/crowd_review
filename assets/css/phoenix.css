@@ -102,19 +102,6 @@ header nav a {
   display: block;
 }
 
-header section {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  justify-items: start;
-  align-items: center;
-}
-
-header nav ul {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2rem;
-}
-
 @media (min-width: 40.0rem) { /* Small devices (landscape phones, 576px and up) */
   header section {
     flex-direction: row;

@@ -6,6 +6,6 @@ defmodule CrowdReviewWeb.PageControllerTest do
 
     assert html_response(conn, 200) =~ "Crowd Review"
     assert html_response(conn, 200) =~ "Request a Review"
-    assert html_response(conn, 200) =~ "Give a Review"
+    assert html_response(conn, 200) =~ "Review Someone Else"
   end
 end

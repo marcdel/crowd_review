@@ -1,5 +1,3 @@
-<h1>Listing Review Requests</h1>
-
 <p>
   Ready to help out another dev, and maybe learn a little something on the way?<br/>
   Make sure you review and follow the <a href="coc.html">code of conduct</a> for our community.<br/>
@@ -28,4 +26,4 @@
   </tbody>
 </table>
 
-<span><%= link "New Review request", to: Routes.review_request_path(@conn, :new) %></span>
+<%= link "Request a Review", to: Routes.review_request_path(@conn, :new), class: "button" %>

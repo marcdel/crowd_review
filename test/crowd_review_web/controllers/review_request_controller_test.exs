@@ -9,15 +9,21 @@ defmodule CrowdReviewWeb.ReviewRequestControllerTest do
 
   describe "index" do
     test "lists all review_request", %{conn: conn} do
+      Accounts.create_review_request(%{language: "elixir", url: "github.com/test/pr/1"}, nil)
+      Accounts.create_review_request(%{language: "elm", url: "github.com/test/pr/2"}, nil)
       conn = get(conn, Routes.review_request_path(conn, :index))
-      assert html_response(conn, 200) =~ "Listing Review Requests"
+      assert html_response(conn, 200) =~ "github.com/test/pr/1"
+      assert html_response(conn, 200) =~ "github.com/test/pr/2"
+      assert html_response(conn, 200) =~ "elixir"
+      assert html_response(conn, 200) =~ "elm"
     end
   end
 
   describe "new review_request" do
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.review_request_path(conn, :new))
-      assert html_response(conn, 200) =~ "New Review Request"
+      assert html_response(conn, 200) =~ "Url"
+      assert html_response(conn, 200) =~ "Language"
     end
   end
 
@@ -49,7 +55,7 @@ defmodule CrowdReviewWeb.ReviewRequestControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.review_request_path(conn, :create), review_request: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Review Request"
+      assert html_response(conn, 200) =~ "Oops"
     end
   end
 end

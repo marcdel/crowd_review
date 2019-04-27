@@ -1,11 +1,11 @@
-<section class="phx-hero">
-  <h1>Crowd Review</h1>
+<section>
   <p>
     Crowdsource your code reviews!
   </p>
   <p>
     Have some code you'd like to get feedback on?<br/>
-    Post a link to your PR and have someone from our community review it!
+    Post a link to your PR and have someone from the<br/>
+    community review it!
   </p>
   <p>
     Looking for a great opportunity to read more code?<br/>
@@ -13,7 +13,7 @@
   </p>
   <br/>
   <p>
-    <%= link "Request a Review", to: Routes.review_request_path(@conn, :new), class: "button" %>
-    <%= link "Give a Review", to: Routes.review_request_path(@conn, :index), class: "button button-outline" %>
+    <%= link "Request a Review", to: Routes.review_request_path(@conn, :new), class: "button button-outline" %>
+    <%= link "Review Someone Else", to: Routes.review_request_path(@conn, :index), class: "button" %>
   </p>
 </section>

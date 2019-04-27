@@ -14,6 +14,6 @@
   <%= error_tag f, :language %>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save", class: "button" %>
   </div>
 <% end %>

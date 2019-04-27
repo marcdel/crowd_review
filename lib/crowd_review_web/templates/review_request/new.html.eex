@@ -1,3 +1,7 @@
-<h1>New Review Request</h1>
+<p>
+  Post a link to the PR (or even just a specific section of code) you'd like reviewed.<br/>
+  You should include the programming language you're looking to get advice in.<br/>
+  Make sure it's public and you're allowed to share it!<br/>
+</p>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.review_request_path(@conn, :create)) %>
