@@ -608,7 +608,7 @@ body {
   font-size: 18px;
 }
 
-a.logo, .logo {
+a.logo, a.logo:hover, .logo {
   font-family: 'Titan One', cursive;
   font-size: 40px;
   color: var(--logo-color);
@@ -634,6 +634,20 @@ a.logo, .logo {
   color: var(--cta-color);
   border-color: var(--cta-color);
   filter: brightness(95%);
+}
+
+header h1 {
+  margin-bottom: 0;
+}
+
+@media (max-width: 40.0rem) {
+  header section {
+    grid-template-columns: 1fr !important;
+  }
+
+  header nav ul {
+    margin-left: 0;
+  }
 }
 
 header section {

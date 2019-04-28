@@ -10,7 +10,7 @@
   <body>
     <header>
       <section class="container">
-        <a class="logo" href="/">Crowd Review</a>
+        <h1><a class="logo" href="/">Crowd Review</a></h1>
         <nav role="navigation">
            <ul>
               <%= if @current_user do %>
