@@ -23,6 +23,7 @@ a.logo, a.logo:hover, .logo {
   font-family: 'Titan One', cursive;
   font-size: 40px;
   color: var(--logo-color);
+  text-decoration: none;
 }
 
 .button {
@@ -76,6 +77,7 @@ header nav ul {
 
 a {
   color: var(--link-color);
+  text-decoration: underline;
 }
 
 a:focus, a:hover {
