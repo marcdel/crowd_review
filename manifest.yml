@@ -9,4 +9,4 @@ applications:
       -   https://github.com/HashNuke/heroku-buildpack-elixir.git
     env:
       MIX_ENV: prod
-    command: mix ecto.migrate && mix phx.server
+    command: mix ecto.migrate && mix run priv/repo/seeds.exs && mix phx.server

@@ -10,7 +10,7 @@
   <%= error_tag f, :url %>
 
   <%= label f, :language %>
-  <%= text_input f, :language %>
+  <%= select f, :language, @languages, class: "language-select" %>
   <%= error_tag f, :language %>
 
   <div>

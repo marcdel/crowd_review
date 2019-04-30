@@ -2,6 +2,7 @@ defmodule CrowdReviewWeb.ReviewRequestController do
   use CrowdReviewWeb, :controller
 
   alias CrowdReview.Accounts
+  alias CrowdReview.Language
   alias CrowdReview.Accounts.ReviewRequest
   alias CrowdReviewWeb.Auth
 
@@ -12,7 +13,7 @@ defmodule CrowdReviewWeb.ReviewRequestController do
 
   def new(conn, _params) do
     changeset = Accounts.change_review_request(%ReviewRequest{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, languages: Language.all())
   end
 
   def create(conn, %{"review_request" => review_request_params}) do
@@ -25,7 +26,7 @@ defmodule CrowdReviewWeb.ReviewRequestController do
         |> redirect(to: Routes.review_request_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, languages: Language.all())
     end
   end
 end

@@ -84,3 +84,7 @@ a:focus, a:hover {
   color: var(--link-color);
   filter: brightness(90%);
 }
+
+select {
+  width: 100%;
+}
