@@ -15,8 +15,11 @@ defmodule CrowdReview.Language do
   end
 
   def all do
-    Language
-    |> Repo.all()
-    |> Enum.map(fn language -> language.name end)
+    languages =
+      Language
+      |> Repo.all()
+      |> Enum.map(fn language -> language.name end)
+
+    ["" | languages]
   end
 end
