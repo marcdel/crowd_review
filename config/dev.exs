@@ -52,7 +52,8 @@ config :crowd_review, CrowdReviewWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/crowd_review_web/views/.*(ex)$},
-      ~r{lib/crowd_review_web/templates/.*(eex)$}
+      ~r{lib/crowd_review_web/templates/.*(eex)$},
+      ~r{lib/crowd_review_web/live/.*(ex)$}
     ]
   ]
 

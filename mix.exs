@@ -40,6 +40,7 @@ defmodule CrowdReview.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.13"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
       {:gettext, "~> 0.16"},
       {:jason, "~> 1.1"},
       {:plug_cowboy, "~> 2.0"},
