@@ -49,7 +49,8 @@ defmodule CrowdReviewWeb.UserFlowsTest do
     |> follow_form(%{
       review_request: %{
         url: "https://github.com/phoenixframework/phoenix/pull/3327",
-        language: "javascript"
+        language: "javascript",
+        description: "I need help with sockets"
       }
     })
     |> assert_response(

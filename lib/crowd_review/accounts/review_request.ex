@@ -6,6 +6,7 @@ defmodule CrowdReview.Accounts.ReviewRequest do
   schema "review_requests" do
     field :language, :string
     field :url, :string
+    field :description, :string
     belongs_to :user, User
 
     timestamps()
@@ -14,7 +15,7 @@ defmodule CrowdReview.Accounts.ReviewRequest do
   @doc false
   def changeset(review_request, attrs) do
     review_request
-    |> cast(attrs, [:url, :language])
+    |> cast(attrs, [:url, :language, :description])
     |> validate_required([:url, :language])
   end
 end

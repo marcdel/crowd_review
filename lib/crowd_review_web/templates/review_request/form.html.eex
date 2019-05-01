@@ -10,13 +10,17 @@
   <%= error_tag f, :url %>
 
   <%= label f, :language %>
-  <%= error_tag f, :language %>
   <%= text_input f, :language, list: "matches" %>
+  <%= error_tag f, :language %>
   <datalist id="matches">
     <%= for match <- @languages do %>
       <option value="<%= match %>"><%= match %></option>
     <% end %>
   </datalist>
+
+  <%= label f, :description, "Description (optional)" %>
+  <%= error_tag f, :description %>
+  <%= textarea f, :description %>
 
   <div>
     <%= submit "Save", class: "button" %>

@@ -150,7 +150,11 @@ defmodule CrowdReview.AccountsTest do
   describe "review_request" do
     alias CrowdReview.Accounts.ReviewRequest
 
-    @valid_attrs %{language: "elixir", url: "github.com/test/pr/1"}
+    @valid_attrs %{
+      language: "elixir",
+      url: "github.com/test/pr/1",
+      description: "need help with pattern matching"
+    }
     @invalid_attrs %{language: nil, url: nil}
 
     def review_request_fixture(attrs \\ %{}) do
@@ -173,6 +177,7 @@ defmodule CrowdReview.AccountsTest do
 
       assert review_request.language == "elixir"
       assert review_request.url == "github.com/test/pr/1"
+      assert review_request.description == "need help with pattern matching"
     end
 
     test "create_review_request/1 with with user links review_request to user" do
