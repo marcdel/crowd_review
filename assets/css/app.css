@@ -9,8 +9,10 @@
 html {
   --cta-color: #C34182;
   --link-color: #C34182;
-  --logo-color: #512e67;
-  --bg-color: #fafafa;
+  --logo-color: #512E67;
+  --bg-color: #FAFAFA;
+  --pill-color: #C34182;
+  --pill-text-color: #FFFFFF;
 }
 
 body {
@@ -90,10 +92,10 @@ select {
 }
 
 .pill {
-  background-color: var(--cta-color);
+  color: var(--pill-text-color);
+  background-color: var(--pill-color);
   border-radius: 15px;
   padding: 0.5rem 1.1rem;
   font-size: 14px;
   font-weight: 800;
-  color: #ffffff;
 }
