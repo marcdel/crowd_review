@@ -11,7 +11,7 @@ html {
   --link-color: #C34182;
   --logo-color: #512E67;
   --bg-color: #FAFAFA;
-  --pill-color: #C34182;
+  --pill-color: #512E67;
   --pill-text-color: #FFFFFF;
 }
 
@@ -98,4 +98,12 @@ select {
   padding: 0.5rem 1.1rem;
   font-size: 14px;
   font-weight: 800;
+}
+
+table tr.review-link-row td {
+  border-bottom: none;
+}
+
+table tr.review-link-row td:last-of-type {
+  text-align: right;
 }

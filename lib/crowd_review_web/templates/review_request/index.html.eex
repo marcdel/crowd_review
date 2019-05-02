@@ -9,15 +9,29 @@
   <li>Don't sweat the small stuff. Skip formatting and code style feedback unless it's asked for.</li>
 </ul>
 
-<%= if Enum.empty?(@review_requests) do %>
-  <p>No one has submitted a PR for review yet. You could be the first!</p>
-<% else %>
-  <%= for review_request <- @review_requests do %>
-    <p>
-      <div><%= review_request.description %></div>
-      <span class="pill"><%= review_request.language %></span> <a href=<%= review_request.url %>><%= review_request.url %></a>
-    </p>
-  <% end %>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= if Enum.empty?(@review_requests) do %>
+      <tr>
+        <td colspan="2">No one has submitted a PR for review yet. You could be the first!</td>
+      </tr>
+    <% else %>
+      <%= for review_request <- @review_requests do %>
+        <tr class="review-link-row">
+          <td><a href=<%= review_request.url %>><%= review_request.url %></a></td>
+          <td><span class="pill"><%= review_request.language %></span></td>
+        </tr>
+          <tr>
+            <td colspan="2"><%= review_request.description %></td>
+          </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link "Request a Review", to: Routes.review_request_path(@conn, :new), class: "button" %>
