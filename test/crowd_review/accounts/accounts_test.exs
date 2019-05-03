@@ -3,6 +3,7 @@ defmodule CrowdReview.AccountsTest do
 
   alias CrowdReview.Accounts
   alias CrowdReview.Accounts.User
+  alias CrowdReview.Language
   alias CrowdReview.Repo
 
   describe "list_users/0" do
@@ -150,14 +151,24 @@ defmodule CrowdReview.AccountsTest do
   describe "review_request" do
     alias CrowdReview.Accounts.ReviewRequest
 
+    @valid_language %{id: 1, name: "Elixir"}
+
     @valid_attrs %{
-      language: "elixir",
+      language: @valid_language,
       url: "github.com/test/pr/1",
       description: "need help with pattern matching"
     }
-    @invalid_attrs %{language: nil, url: nil}
+    @invalid_attrs %{url: nil, language_id: nil}
+
+    def language_fixture() do
+      %Language{}
+      |> Language.changeset(@valid_language)
+      |> Repo.insert()
+    end
 
     def review_request_fixture(attrs \\ %{}) do
+      language_fixture()
+
       {:ok, review_request} =
         attrs
         |> Enum.into(@valid_attrs)
@@ -167,21 +178,30 @@ defmodule CrowdReview.AccountsTest do
     end
 
     test "list_review_requests/0 returns all review_request" do
-      review_request = review_request_fixture()
-      assert Accounts.list_review_requests() == [review_request]
+      expected_review_request = review_request_fixture()
+      [actual_review_request] = Accounts.list_review_requests()
+
+      assert actual_review_request.url == expected_review_request.url
+      assert actual_review_request.description == expected_review_request.description
+      assert actual_review_request.language.name == expected_review_request.language.name
     end
 
     test "create_review_request/1 with valid data creates a review_request" do
-      assert {:ok, %ReviewRequest{} = review_request} =
+      language_fixture()
+
+      assert {:ok, %ReviewRequest{}} =
                Accounts.create_review_request(@valid_attrs, nil)
 
-      assert review_request.language == "elixir"
+      [review_request] = Accounts.list_review_requests()
+
+      assert review_request.language.name == "Elixir"
       assert review_request.url == "github.com/test/pr/1"
       assert review_request.description == "need help with pattern matching"
     end
 
     test "create_review_request/1 with with user links review_request to user" do
       user = Fixtures.registered_user()
+      language_fixture()
 
       assert {:ok, %ReviewRequest{} = review_request} =
                Accounts.create_review_request(@valid_attrs, user)

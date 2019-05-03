@@ -49,13 +49,15 @@ defmodule CrowdReviewWeb.UserFlowsTest do
     |> follow_form(%{
       review_request: %{
         url: "https://github.com/phoenixframework/phoenix/pull/3327",
-        language: "javascript",
+        language: %{
+          name: "Javascript"
+        },
         description: "I need help with sockets"
       }
     })
     |> assert_response(
       status: 200,
-      html: "https://github.com/phoenixframework/phoenix/pull/3327",
+      html: "Review request created successfully.",
       path: Routes.review_request_path(conn, :index)
     )
   end

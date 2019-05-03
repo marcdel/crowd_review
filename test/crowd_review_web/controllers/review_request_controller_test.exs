@@ -5,7 +5,7 @@ defmodule CrowdReviewWeb.ReviewRequestControllerTest do
   alias CrowdReview.Repo
 
   @create_attrs %{
-    language: "elixir",
+    language: %{name: "Elixir"},
     url: "github.com/test/pr/1",
     description: "need help with pattern matching"
   }
@@ -13,21 +13,21 @@ defmodule CrowdReviewWeb.ReviewRequestControllerTest do
 
   describe "index" do
     test "lists all review_request", %{conn: conn} do
-      Accounts.create_review_request(
-        %{language: "elixir", url: "github.com/test/pr/1", description: "desc1"},
+      {:ok, _} = Accounts.create_review_request(
+        %{language: %{name: "Elixir"}, url: "github.com/test/pr/1", description: "desc1"},
         nil
       )
 
-      Accounts.create_review_request(
-        %{language: "elm", url: "github.com/test/pr/2", description: "desc2"},
+      {:ok, _} = Accounts.create_review_request(
+        %{language: %{name: "Elm"}, url: "github.com/test/pr/2", description: "desc2"},
         nil
       )
 
       conn = get(conn, Routes.review_request_path(conn, :index))
       assert html_response(conn, 200) =~ "github.com/test/pr/1"
       assert html_response(conn, 200) =~ "github.com/test/pr/2"
-      assert html_response(conn, 200) =~ "elixir"
-      assert html_response(conn, 200) =~ "elm"
+      assert html_response(conn, 200) =~ "Elixir"
+      assert html_response(conn, 200) =~ "Elm"
       assert html_response(conn, 200) =~ "desc1"
       assert html_response(conn, 200) =~ "desc2"
     end
@@ -49,7 +49,7 @@ defmodule CrowdReviewWeb.ReviewRequestControllerTest do
       assert redirected_to(conn) == Routes.review_request_path(conn, :index)
 
       conn = get(conn, Routes.review_request_path(conn, :index))
-      assert html_response(conn, 200) =~ "elixir"
+      assert html_response(conn, 200) =~ "Elixir"
       assert html_response(conn, 200) =~ "github.com/test/pr/1"
       assert html_response(conn, 200) =~ "need help with pattern matching"
     end

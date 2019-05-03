@@ -24,7 +24,7 @@
       <%= for review_request <- @review_requests do %>
         <tr class="review-link-row">
           <td><a href=<%= review_request.url %>><%= review_request.url %></a></td>
-          <td><span class="pill"><%= review_request.language %></span></td>
+          <td><span class="pill"><%= review_request.language.name %></span></td>
         </tr>
           <tr>
             <td colspan="2"><%= review_request.description %></td>

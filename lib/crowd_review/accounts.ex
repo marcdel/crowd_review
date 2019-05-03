@@ -68,7 +68,9 @@ defmodule CrowdReview.Accounts do
   end
 
   def list_review_requests do
-    Repo.all(ReviewRequest)
+    ReviewRequest
+    |> Repo.all()
+    |> Repo.preload(:language)
   end
 
   def create_review_request(attrs, nil = _user) do
