@@ -11,13 +11,8 @@
 
   <%= inputs_for f, :language, fn l -> %>
     <%= label l, :name, "Language" %>
-    <%= text_input l, :name, list: "matches" %>
+    <%= select l, :name, @languages %>
     <%= error_tag l, :name %>
-    <datalist id="matches">
-      <%= for match <- @languages do %>
-        <option value="<%= match %>"><%= match %></option>
-      <% end %>
-    </datalist>
   <% end %>
 
   <%= label f, :description, "Description (optional)" %>
