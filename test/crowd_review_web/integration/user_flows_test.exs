@@ -42,6 +42,8 @@ defmodule CrowdReviewWeb.UserFlowsTest do
 
   @tag :integration
   test "user can create a new review request and see it in the list", %{conn: conn} do
+    Fixtures.language_fixture(%{name: "Javascript"})
+
     conn
     |> get(Routes.page_path(conn, :index))
     |> follow_link("Request a Review")

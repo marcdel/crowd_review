@@ -1,5 +1,5 @@
 defmodule Fixtures do
-  alias CrowdReview.Accounts
+  alias CrowdReview.{Accounts, Language, Repo}
 
   def registered_user(attrs \\ %{}) do
     default_user_attrs = %{
@@ -18,5 +18,18 @@ defmodule Fixtures do
       |> Accounts.register_user()
 
     user
+  end
+
+  @valid_language %{id: 1, name: "Javascript"}
+
+  def language_fixture(attrs \\ %{}) do
+    attrs = Enum.into(attrs, @valid_language)
+
+    {:ok, language} =
+      %Language{}
+      |> Language.changeset(attrs)
+      |> Repo.insert()
+
+    language
   end
 end

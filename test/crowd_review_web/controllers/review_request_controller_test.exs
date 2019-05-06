@@ -13,15 +13,17 @@ defmodule CrowdReviewWeb.ReviewRequestControllerTest do
 
   describe "index" do
     test "lists all review_request", %{conn: conn} do
-      {:ok, _} = Accounts.create_review_request(
-        %{language: %{name: "Elixir"}, url: "github.com/test/pr/1", description: "desc1"},
-        nil
-      )
+      {:ok, _} =
+        Accounts.create_review_request(
+          %{language: %{name: "Elixir"}, url: "github.com/test/pr/1", description: "desc1"},
+          nil
+        )
 
-      {:ok, _} = Accounts.create_review_request(
-        %{language: %{name: "Elm"}, url: "github.com/test/pr/2", description: "desc2"},
-        nil
-      )
+      {:ok, _} =
+        Accounts.create_review_request(
+          %{language: %{name: "Elm"}, url: "github.com/test/pr/2", description: "desc2"},
+          nil
+        )
 
       conn = get(conn, Routes.review_request_path(conn, :index))
       assert html_response(conn, 200) =~ "github.com/test/pr/1"

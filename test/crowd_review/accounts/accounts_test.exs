@@ -3,7 +3,6 @@ defmodule CrowdReview.AccountsTest do
 
   alias CrowdReview.Accounts
   alias CrowdReview.Accounts.User
-  alias CrowdReview.Language
   alias CrowdReview.Repo
 
   describe "list_users/0" do
@@ -158,16 +157,10 @@ defmodule CrowdReview.AccountsTest do
       url: "github.com/test/pr/1",
       description: "need help with pattern matching"
     }
-    @invalid_attrs %{url: nil, language_id: nil}
-
-    def language_fixture() do
-      %Language{}
-      |> Language.changeset(@valid_language)
-      |> Repo.insert()
-    end
+    @invalid_attrs %{url: nil, language: nil}
 
     def review_request_fixture(attrs \\ %{}) do
-      language_fixture()
+      Fixtures.language_fixture(@valid_language)
 
       {:ok, review_request} =
         attrs
@@ -187,21 +180,33 @@ defmodule CrowdReview.AccountsTest do
     end
 
     test "create_review_request/1 with valid data creates a review_request" do
-      language_fixture()
+      Fixtures.language_fixture(@valid_language)
 
-      assert {:ok, %ReviewRequest{}} =
-               Accounts.create_review_request(@valid_attrs, nil)
+      assert {:ok, %ReviewRequest{}} = Accounts.create_review_request(@valid_attrs, nil)
 
       [review_request] = Accounts.list_review_requests()
-
       assert review_request.language.name == "Elixir"
       assert review_request.url == "github.com/test/pr/1"
       assert review_request.description == "need help with pattern matching"
     end
 
+    test "create_review_request/1 does not create new languages" do
+      count_before =
+        CrowdReview.Language.all()
+        |> Enum.count()
+
+      assert {:ok, %ReviewRequest{}} = Accounts.create_review_request(@valid_attrs, nil)
+
+      count_after =
+        CrowdReview.Language.all()
+        |> Enum.count()
+
+      assert count_before == count_after
+    end
+
     test "create_review_request/1 with with user links review_request to user" do
       user = Fixtures.registered_user()
-      language_fixture()
+      Fixtures.language_fixture(@valid_language)
 
       assert {:ok, %ReviewRequest{} = review_request} =
                Accounts.create_review_request(@valid_attrs, user)

@@ -520,10 +520,12 @@ languages = [
   %{name: "Zimpl"}
 ]
 
-Enum.each(languages, fn language_attrs ->
-  found_language = Repo.get_by(Language, name: language_attrs.name)
+import Ecto.Query
 
-  if(found_language == nil) do
+Enum.each(languages, fn language_attrs ->
+  query = from l in Language, where: l.name == ^language_attrs.name
+
+  unless(Repo.exists?(query)) do
     changeset = Language.changeset(%Language{}, language_attrs)
     Repo.insert!(changeset)
   end
