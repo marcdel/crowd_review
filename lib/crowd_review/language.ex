@@ -2,6 +2,7 @@ defmodule CrowdReview.Language do
   use Ecto.Schema
   import Ecto.Changeset
   alias CrowdReview.{Language, Repo}
+  alias CrowdReview.Accounts.ReviewRequest
 
   schema "languages" do
     field :name, :string
@@ -13,6 +14,10 @@ defmodule CrowdReview.Language do
     |> cast(attrs, [:name])
     |> validate_required([:name])
     |> unique_constraint(:name)
+  end
+
+  def get_by_name(name) do
+    Repo.get_by(Language, name: name)
   end
 
   def all do

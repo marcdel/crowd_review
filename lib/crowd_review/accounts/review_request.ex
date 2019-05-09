@@ -16,8 +16,7 @@ defmodule CrowdReview.Accounts.ReviewRequest do
   @doc false
   def changeset(review_request, attrs) do
     review_request
-    |> cast(attrs, [:url, :description])
-    |> cast_assoc(:language, with: &Language.changeset/2)
-    |> validate_required([:url, :language])
+    |> cast(attrs, [:url, :description, :language_id])
+    |> validate_required([:url, :language_id])
   end
 end

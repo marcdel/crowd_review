@@ -5,23 +5,35 @@ defmodule CrowdReviewWeb.ReviewRequestControllerTest do
   alias CrowdReview.Repo
 
   @create_attrs %{
-    language: %{name: "Elixir"},
-    url: "github.com/test/pr/1",
-    description: "need help with pattern matching"
+    "language" => %{"name" => "Elixir"},
+    "url" => "github.com/test/pr/1",
+    "description" => "need help with pattern matching"
   }
-  @invalid_attrs %{language: nil, url: nil}
+  @invalid_attrs %{
+    "language" => %{
+      "name" => ""
+    },
+    "url" => "",
+    "description" => ""
+  }
 
   describe "index" do
     test "lists all review_request", %{conn: conn} do
+      elixir = Fixtures.language_fixture(%{name: "Elixir"})
+
       {:ok, _} =
         Accounts.create_review_request(
           %{language: %{name: "Elixir"}, url: "github.com/test/pr/1", description: "desc1"},
+          elixir,
           nil
         )
+
+      elm = Fixtures.language_fixture(%{name: "Elm"})
 
       {:ok, _} =
         Accounts.create_review_request(
           %{language: %{name: "Elm"}, url: "github.com/test/pr/2", description: "desc2"},
+          elm,
           nil
         )
 
@@ -46,6 +58,7 @@ defmodule CrowdReviewWeb.ReviewRequestControllerTest do
 
   describe "create review_request" do
     test "redirects to index when data is valid", %{conn: conn} do
+      Fixtures.language_fixture(%{name: "Elixir"})
       conn = post(conn, Routes.review_request_path(conn, :create), review_request: @create_attrs)
 
       assert redirected_to(conn) == Routes.review_request_path(conn, :index)
@@ -57,6 +70,7 @@ defmodule CrowdReviewWeb.ReviewRequestControllerTest do
     end
 
     test "creates review requests for logged in users", %{conn: conn} do
+      Fixtures.language_fixture(%{name: "Elixir"})
       user = Fixtures.registered_user()
       conn = sign_in(conn, user)
       conn = post(conn, Routes.review_request_path(conn, :create), review_request: @create_attrs)

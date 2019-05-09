@@ -19,7 +19,12 @@ defmodule CrowdReviewWeb.ReviewRequestController do
   def create(conn, %{"review_request" => review_request_params}) do
     user = Auth.current_user(conn)
 
-    case Accounts.create_review_request(review_request_params, user) do
+    language =
+      review_request_params
+      |> Kernel.get_in(["language", "name"])
+      |> Language.get_by_name()
+
+    case Accounts.create_review_request(review_request_params, language, user) do
       {:ok, _review_request} ->
         conn
         |> put_flash(:info, "Review request created successfully.")

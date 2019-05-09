@@ -2,6 +2,7 @@ defmodule CrowdReview.Accounts do
   import Ecto.Query, warn: false
 
   alias CrowdReview.Accounts.{ReviewRequest, User}
+  alias CrowdReview.Language
   alias CrowdReview.Repo
 
   def list_users do
@@ -73,17 +74,25 @@ defmodule CrowdReview.Accounts do
     |> Repo.preload(:language)
   end
 
-  def create_review_request(attrs, nil = _user) do
+  def create_review_request(attrs, language, user) do
     %ReviewRequest{}
+    |> put_user_id(user)
+    |> put_language_id(language)
+    |> Repo.preload([:user, :language])
     |> ReviewRequest.changeset(attrs)
     |> Repo.insert()
   end
 
-  def create_review_request(attrs, %User{} = user) do
-    user
-    |> Ecto.build_assoc(:review_requests)
-    |> ReviewRequest.changeset(attrs)
-    |> Repo.insert()
+  defp put_user_id(request, nil), do: request
+
+  defp put_user_id(request, user) do
+    Map.put(request, :user_id, user.id)
+  end
+
+  defp put_language_id(request, nil), do: request
+
+  defp put_language_id(request, language) do
+    Map.put(request, :language_id, language.id)
   end
 
   def change_review_request(%ReviewRequest{} = review_request) do

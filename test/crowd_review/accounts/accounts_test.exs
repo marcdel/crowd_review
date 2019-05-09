@@ -150,22 +150,21 @@ defmodule CrowdReview.AccountsTest do
   describe "review_request" do
     alias CrowdReview.Accounts.ReviewRequest
 
-    @valid_language %{id: 1, name: "Elixir"}
+    @valid_language %{name: "Elixir"}
 
     @valid_attrs %{
       language: @valid_language,
       url: "github.com/test/pr/1",
       description: "need help with pattern matching"
     }
-    @invalid_attrs %{url: nil, language: nil}
 
     def review_request_fixture(attrs \\ %{}) do
-      Fixtures.language_fixture(@valid_language)
+      language = Fixtures.language_fixture(@valid_language)
 
       {:ok, review_request} =
         attrs
         |> Enum.into(@valid_attrs)
-        |> Accounts.create_review_request(nil)
+        |> Accounts.create_review_request(language, nil)
 
       review_request
     end
@@ -180,9 +179,9 @@ defmodule CrowdReview.AccountsTest do
     end
 
     test "create_review_request/1 with valid data creates a review_request" do
-      Fixtures.language_fixture(@valid_language)
+      language = Fixtures.language_fixture(@valid_language)
 
-      assert {:ok, %ReviewRequest{}} = Accounts.create_review_request(@valid_attrs, nil)
+      assert {:ok, %ReviewRequest{}} = Accounts.create_review_request(@valid_attrs, language, nil)
 
       [review_request] = Accounts.list_review_requests()
       assert review_request.language.name == "Elixir"
@@ -191,11 +190,13 @@ defmodule CrowdReview.AccountsTest do
     end
 
     test "create_review_request/1 does not create new languages" do
+      language = Fixtures.language_fixture(@valid_language)
+
       count_before =
         CrowdReview.Language.all()
         |> Enum.count()
 
-      assert {:ok, %ReviewRequest{}} = Accounts.create_review_request(@valid_attrs, nil)
+      assert {:ok, %ReviewRequest{}} = Accounts.create_review_request(@valid_attrs, language, nil)
 
       count_after =
         CrowdReview.Language.all()
@@ -206,16 +207,44 @@ defmodule CrowdReview.AccountsTest do
 
     test "create_review_request/1 with with user links review_request to user" do
       user = Fixtures.registered_user()
-      Fixtures.language_fixture(@valid_language)
+      language = Fixtures.language_fixture(@valid_language)
 
       assert {:ok, %ReviewRequest{} = review_request} =
-               Accounts.create_review_request(@valid_attrs, user)
+               Accounts.create_review_request(@valid_attrs, language, user)
 
       assert review_request.user_id == user.id
     end
 
     test "create_review_request/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Accounts.create_review_request(@invalid_attrs, nil)
+      {:ok, user} =
+        Accounts.register_user(%{
+          name: "Marc",
+          username: "marcdel",
+          credential: %{
+            email: "marcdel@email.com",
+            password: "password"
+          }
+        })
+
+      assert {:error, %Ecto.Changeset{}} =
+               Accounts.create_review_request(
+                 %{
+                   url: "github.com/test/pr/1",
+                   description: "need help with pattern matching"
+                 },
+                 nil,
+                 user
+               )
+
+      assert {:error, %Ecto.Changeset{}} =
+               Accounts.create_review_request(
+                 %{
+                   url: "github.com/test/pr/1",
+                   description: "need help with pattern matching"
+                 },
+                 nil,
+                 nil
+               )
     end
 
     test "change_review_request/1 returns a review_request changeset" do
